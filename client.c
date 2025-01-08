@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
+#include <time.h>
 
 void print_usage(){
     printf("Usage: ./client <server_ip> <port> -type <temperature|humidity|air_quality> -coords <x> <y>\n");
@@ -79,13 +80,15 @@ int main(int argc, char *argv[]) {
     }
 
     freeaddrinfo(res);
-    printf("Conectado ao servidor\n");
+    printf("Conectado ao servidor\n");20
+0
+    srand(time(NULL));
 
     struct sensor_message msg;
     strncpy(msg.type, sensor_type, sizeof(msg.type) - 1); 
     msg.coords[0] = x;
     msg.coords[1] = y;
-    msg.measurement = 0.0;
+    msg.measurement = 20.0 + ((rand() % 210) / 10.0);
 
 
     // Enviar a mensagem
